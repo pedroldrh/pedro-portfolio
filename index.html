@@ -136,7 +136,7 @@
               abandoned railroad videos. I also like
               <a href="https://www.youtube.com/@PeterSantenello" target="_blank" rel="noreferrer">Peter Santenello</a>
               videos for learning about the U.S. and its different places and
-              social scenes. I enjoy
+              social scenes. I enjoy the show
               <a href="https://www.youtube.com/@LaRevuelta_RTVE" target="_blank" rel="noreferrer">La Revuelta</a>
               and have been a fan for the past six years.
             </p>
@@ -145,6 +145,28 @@
               <a href="https://www.paulgraham.com/articles.html" target="_blank" rel="noreferrer">essays</a>
               about startups, ideas, and life.
             </p>
+          </div>
+          <div class="music-player" aria-label="Music tape player">
+            <button class="cassette" type="button" data-tape-button aria-label="Play a random song">
+              <span class="cassette-label">
+                <span>Pedro's tape</span>
+                <span data-song-count>waiting for tracks</span>
+              </span>
+              <span class="cassette-window">
+                <span class="cassette-reel"></span>
+                <span class="cassette-band"></span>
+                <span class="cassette-reel"></span>
+              </span>
+              <span class="cassette-strip">
+                <span>shuffle</span>
+                <span>click tape</span>
+              </span>
+            </button>
+            <div class="deck-display" aria-live="polite">
+              <span class="deck-status" data-song-status>Tape is empty for now.</span>
+              <strong data-song-title>Send me the songs you want on it.</strong>
+              <a data-song-link href="#" aria-hidden="true" tabindex="-1">Open song</a>
+            </div>
           </div>
         </div>
       </section>
@@ -472,6 +494,52 @@
           caption: "Stanford.",
         },
       ];
+      const favoriteSongs = [];
+      let currentSongIndex = -1;
+
+      const updateSongDisplay = (song) => {
+        const status = document.querySelector("[data-song-status]");
+        const title = document.querySelector("[data-song-title]");
+        const link = document.querySelector("[data-song-link]");
+        if (!status || !title || !link) return;
+
+        if (!song) {
+          status.textContent = "Tape is empty for now.";
+          title.textContent = "Send me the songs you want on it.";
+          link.setAttribute("aria-hidden", "true");
+          link.setAttribute("tabindex", "-1");
+          link.removeAttribute("href");
+          return;
+        }
+
+        status.textContent = song.artist;
+        title.textContent = song.title;
+        link.href = song.url;
+        link.textContent = "Open song";
+        link.removeAttribute("aria-hidden");
+        link.removeAttribute("tabindex");
+      };
+
+      document.querySelector("[data-song-count]").textContent =
+        favoriteSongs.length ? `${favoriteSongs.length} tracks` : "waiting for tracks";
+
+      document.querySelector("[data-tape-button]")?.addEventListener("click", (event) => {
+        event.currentTarget.classList.add("is-playing");
+        window.setTimeout(() => event.currentTarget.classList.remove("is-playing"), 620);
+        if (!favoriteSongs.length) {
+          updateSongDisplay(null);
+          return;
+        }
+        let nextSongIndex = Math.floor(Math.random() * favoriteSongs.length);
+        if (favoriteSongs.length > 1) {
+          while (nextSongIndex === currentSongIndex) {
+            nextSongIndex = Math.floor(Math.random() * favoriteSongs.length);
+          }
+        }
+        currentSongIndex = nextSongIndex;
+        updateSongDisplay(favoriteSongs[currentSongIndex]);
+      });
+
       let currentVideoIndex = 0;
       document.querySelector("[data-video-next]")?.addEventListener("click", () => {
         currentVideoIndex = (currentVideoIndex + 1) % favoriteVideos.length;

@@ -405,6 +405,132 @@ h2 {
   font-weight: 700;
 }
 
+.music-player {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.cassette {
+  min-height: 172px;
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--text);
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, rgba(116, 217, 0, 0.16), transparent 38%),
+    #fffdf4;
+  padding: 18px;
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.cassette:hover {
+  transform: translateY(-2px);
+}
+
+.cassette.is-playing .cassette-reel {
+  animation: reel-spin 620ms linear;
+}
+
+.cassette-label,
+.cassette-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.cassette-label span:first-child {
+  font-weight: 800;
+}
+
+.cassette-label span:last-child,
+.cassette-strip {
+  color: var(--muted);
+}
+
+.cassette-window {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: 64px minmax(60px, 1fr) 64px;
+  gap: 14px;
+  align-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background:
+    linear-gradient(rgba(16, 18, 15, 0.06) 1px, transparent 1px),
+    #f8f9f5;
+  background-size: 100% 12px;
+  padding: 12px;
+}
+
+.cassette-reel {
+  aspect-ratio: 1;
+  border: 2px solid var(--text);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--panel) 0 15%, transparent 16%),
+    conic-gradient(from 0deg, var(--text) 0 9deg, transparent 9deg 56deg, var(--text) 56deg 65deg, transparent 65deg 120deg, var(--text) 120deg 129deg, transparent 129deg 176deg, var(--text) 176deg 185deg, transparent 185deg 240deg, var(--text) 240deg 249deg, transparent 249deg 296deg, var(--text) 296deg 305deg, transparent 305deg 360deg),
+    #eef2ea;
+}
+
+.cassette-band {
+  height: 6px;
+  border-top: 2px solid var(--text);
+  border-bottom: 2px solid var(--text);
+}
+
+.deck-display {
+  min-height: 172px;
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.58);
+  padding: 24px;
+}
+
+.deck-status {
+  color: var(--accent);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.deck-display strong {
+  max-width: 560px;
+  font-size: clamp(24px, 3.2vw, 44px);
+  line-height: 1;
+}
+
+.deck-display a {
+  width: fit-content;
+  margin-top: 6px;
+}
+
+.deck-display a[aria-hidden="true"] {
+  display: none;
+}
+
+@keyframes reel-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .videos {
   padding-top: 104px;
 }
@@ -639,6 +765,10 @@ h2 {
 
   .about-grid {
     gap: 18px;
+  }
+
+  .music-player {
+    grid-template-columns: 1fr;
   }
 
   .video-stage,

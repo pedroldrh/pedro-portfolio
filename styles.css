@@ -338,16 +338,20 @@ h2 {
 }
 
 .video-heading {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 54px;
-  gap: 24px;
-  align-items: end;
+  max-width: 980px;
 }
 
 .video-feature {
   margin-top: 44px;
   border-top: 1px solid var(--text);
   padding-top: 22px;
+}
+
+.video-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 54px;
+  gap: 18px;
+  align-items: center;
 }
 
 .video-embed {
@@ -565,7 +569,7 @@ h2 {
     gap: 18px;
   }
 
-  .video-heading,
+  .video-stage,
   .video-meta {
     grid-template-columns: 1fr;
   }
@@ -573,6 +577,7 @@ h2 {
   .video-next {
     width: 48px;
     height: 48px;
+    justify-self: end;
   }
 
   .project-row {

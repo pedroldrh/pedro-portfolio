@@ -127,26 +127,28 @@
             <div class="section-kicker">Videos</div>
             <h2 id="videos-title">A collection of the best videos I have ever watched.</h2>
           </div>
-          <button class="video-next" type="button" data-video-next aria-label="Next video">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </button>
         </div>
         <div class="video-feature">
-          <div class="video-embed">
-            <iframe
-              data-video-frame
-              src="https://www.youtube.com/embed/Ir3eJ1t13fk?start=3334"
-              title="The Man With No Legal Identity - Off the Grid in Appalachia"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+          <div class="video-stage">
+            <div class="video-embed">
+              <iframe
+                data-video-frame
+                src="https://www.youtube.com/embed/9IiTdSnmS7E"
+                title="Sisyphus and the Impossible Dream"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <button class="video-next" type="button" data-video-next aria-label="Next video">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
           </div>
           <div class="video-meta">
-            <span data-video-count>01 / 06</span>
-            <strong data-video-title>The Man With No Legal Identity - Off the Grid in Appalachia</strong>
-            <p data-video-caption>Peter Santenello. The first video in this collection.</p>
+            <span data-video-count>01 / 07</span>
+            <strong data-video-title>Sisyphus and the Impossible Dream</strong>
+            <p data-video-caption>Casey Neistat. The first video in this collection.</p>
           </div>
         </div>
       </section>
@@ -377,9 +379,14 @@
 
       const favoriteVideos = [
         {
+          src: "https://www.youtube.com/embed/9IiTdSnmS7E",
+          title: "Sisyphus and the Impossible Dream",
+          caption: "Casey Neistat. The first video in this collection.",
+        },
+        {
           src: "https://www.youtube.com/embed/Ir3eJ1t13fk?start=3334",
           title: "The Man With No Legal Identity - Off the Grid in Appalachia",
-          caption: "Peter Santenello. The first video in this collection.",
+          caption: "Peter Santenello. A video in this collection.",
         },
         {
           src: "https://www.youtube.com/embed/DvgQ3jSgKls?start=116",

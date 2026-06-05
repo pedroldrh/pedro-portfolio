@@ -63,11 +63,39 @@
             </a>
           </div>
         </div>
-        <aside class="life-knot-panel" aria-label="Conway's Game of Life on a toroidal trefoil knot">
-          <canvas id="life-knot" width="720" height="720"></canvas>
-          <div class="life-knot-caption">
-            <span>Drag to rotate</span>
-            <span>Conway Life on a trefoil torus</span>
+        <aside class="life-knot-card" aria-label="Conway's Game of Life on a toroidal trefoil knot">
+          <button class="life-knot-flip" type="button" data-knot-card aria-label="Flip Conway Life explanation card">
+            <span class="life-knot-face life-knot-front">
+              <canvas id="life-knot" width="720" height="720"></canvas>
+              <span class="life-knot-caption">
+                <span>Drag to rotate</span>
+                <span>Click to learn what this is</span>
+              </span>
+            </span>
+            <span class="life-knot-face life-knot-back">
+              <span class="life-knot-back-content">
+                <span class="section-kicker">Conway Life</span>
+                <strong>Game of Life on a trefoil torus.</strong>
+                <span>
+                  Conway’s Game of Life is a cellular automaton: tiny cells turn
+                  on or off based on their neighbors, creating patterns that can
+                  feel almost alive.
+                </span>
+                <span>
+                  I mapped those cells onto a toroidal trefoil knot, so the
+                  grid wraps around a continuous knotted surface instead of a
+                  flat board.
+                </span>
+                <span>
+                  John Horton Conway was the British mathematician who created
+                  the Game of Life in 1970 and worked on deep, playful problems
+                  across games, symmetry, numbers, and logic.
+                </span>
+                <em>Click to return</em>
+              </span>
+            </span>
+          </button>
+        </aside>
           </div>
         </aside>
       </section>
@@ -384,17 +412,17 @@
           caption: "Casey Neistat. The first video in this collection.",
         },
         {
-          src: "https://www.youtube.com/embed/Ir3eJ1t13fk?start=3334",
+          src: "https://www.youtube.com/embed/Ir3eJ1t13fk",
           title: "The Man With No Legal Identity - Off the Grid in Appalachia",
           caption: "Peter Santenello. A video in this collection.",
         },
         {
-          src: "https://www.youtube.com/embed/DvgQ3jSgKls?start=116",
+          src: "https://www.youtube.com/embed/DvgQ3jSgKls",
           title: "Exploring 100 Miles of Abandoned Railroad Camping & Fishing",
           caption: "Matt Spears. A video in this collection.",
         },
         {
-          src: "https://www.youtube.com/embed/Ny2c0pzmhTg?start=3",
+          src: "https://www.youtube.com/embed/Ny2c0pzmhTg",
           title: "Farm Boy Becomes NASA Scientist, Then Gives it All Up",
           caption: "Quantum Boy. A video in this collection.",
         },
@@ -431,6 +459,11 @@
         if (count) {
           count.textContent = `${String(currentVideoIndex + 1).padStart(2, "0")} / ${String(favoriteVideos.length).padStart(2, "0")}`;
         }
+      });
+
+      document.querySelector("[data-knot-card]")?.addEventListener("click", (event) => {
+        if (event.target.closest("canvas")?.dataset.wasDragged) return;
+        event.currentTarget.classList.toggle("is-flipped");
       });
     </script>
     <script src="./life-knot.js"></script>

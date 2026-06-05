@@ -159,9 +159,31 @@ nav a:hover {
   line-height: 1.55;
 }
 
-.life-knot-panel {
+.life-knot-card {
   width: 100%;
   align-self: center;
+  perspective: 1200px;
+}
+
+.life-knot-flip {
+  position: relative;
+  width: 100%;
+  display: block;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.life-knot-flip.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.life-knot-face {
+  width: 100%;
   border: 1px solid var(--text);
   border-radius: 6px;
   background:
@@ -171,9 +193,59 @@ nav a:hover {
   background-size: 22px 22px;
   box-shadow: var(--shadow);
   overflow: hidden;
+  backface-visibility: hidden;
 }
 
-.life-knot-panel canvas {
+.life-knot-front {
+  display: block;
+}
+
+.life-knot-back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  min-height: 100%;
+  transform: rotateY(180deg);
+  background:
+    linear-gradient(rgba(16, 18, 15, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 18, 15, 0.045) 1px, transparent 1px),
+    #ffffff;
+  background-size: 22px 22px;
+}
+
+.life-knot-back-content {
+  min-height: 100%;
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  padding: clamp(26px, 4vw, 46px);
+  text-align: left;
+}
+
+.life-knot-back-content .section-kicker {
+  margin: 0;
+}
+
+.life-knot-back-content strong {
+  max-width: 420px;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 0.98;
+}
+
+.life-knot-back-content span:not(.section-kicker) {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.life-knot-back-content em {
+  color: var(--accent);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.life-knot-front canvas {
   width: 100%;
   aspect-ratio: 1;
   display: block;
@@ -182,7 +254,7 @@ nav a:hover {
   user-select: none;
 }
 
-.life-knot-panel canvas:active {
+.life-knot-front canvas:active {
   cursor: grabbing;
 }
 
@@ -546,7 +618,7 @@ h2 {
     font-size: 17px;
   }
 
-  .life-knot-panel {
+  .life-knot-card {
     max-width: 520px;
   }
 

@@ -19,6 +19,7 @@
   let isDragging = false;
   let dragX = 0;
   let dragY = 0;
+  let dragDistance = 0;
   let lastTime = 0;
   let lastPopulation = 0;
   let stagnantTicks = 0;
@@ -265,6 +266,7 @@
     isDragging = true;
     dragX = p.clientX;
     dragY = p.clientY;
+    dragDistance = 0;
     velocityX = 0;
     velocityY = 0;
     canvas.setPointerCapture?.(event.pointerId);
@@ -276,6 +278,7 @@
     const p = getPoint(event);
     const dx = p.clientX - dragX;
     const dy = p.clientY - dragY;
+    dragDistance += Math.hypot(dx, dy);
     dragX = p.clientX;
     dragY = p.clientY;
     const gain = 0.008;
@@ -286,6 +289,12 @@
   }
 
   function endDrag(event) {
+    if (dragDistance > 8) {
+      canvas.dataset.wasDragged = "true";
+      window.setTimeout(() => {
+        delete canvas.dataset.wasDragged;
+      }, 120);
+    }
     isDragging = false;
     canvas.releasePointerCapture?.(event.pointerId);
   }

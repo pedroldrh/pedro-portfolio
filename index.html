@@ -117,15 +117,26 @@
               <a href="https://www.paulgraham.com/articles.html" target="_blank" rel="noreferrer">essays</a>
               about startups, ideas, and life.
             </p>
+          </div>
+          <aside class="video-collection" aria-label="Favorite video collection">
             <div class="video-embed">
               <iframe
+                data-video-frame
                 src="https://www.youtube.com/embed/9IiTdSnmS7E"
                 title="Casey Neistat video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
               ></iframe>
             </div>
-          </div>
+            <div class="video-collection-footer">
+              <p data-video-caption>A collection of the best videos I have ever watched</p>
+              <button class="video-next" type="button" data-video-next aria-label="Next video">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -351,6 +362,26 @@
         target.scrollIntoView({ behavior: "instant", block: "start" });
         history.pushState(null, "", "#projects");
         root.style.scrollBehavior = previousScrollBehavior;
+      });
+
+      const favoriteVideos = [
+        {
+          src: "https://www.youtube.com/embed/9IiTdSnmS7E",
+          title: "Casey Neistat video",
+          caption: "A collection of the best videos I have ever watched",
+        },
+      ];
+      let currentVideoIndex = 0;
+      document.querySelector("[data-video-next]")?.addEventListener("click", () => {
+        currentVideoIndex = (currentVideoIndex + 1) % favoriteVideos.length;
+        const video = favoriteVideos[currentVideoIndex];
+        const frame = document.querySelector("[data-video-frame]");
+        const caption = document.querySelector("[data-video-caption]");
+        if (frame) {
+          frame.src = video.src;
+          frame.title = video.title;
+        }
+        if (caption) caption.textContent = video.caption;
       });
     </script>
     <script src="./life-knot.js"></script>

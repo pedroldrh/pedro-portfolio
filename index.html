@@ -118,25 +118,36 @@
               about startups, ideas, and life.
             </p>
           </div>
-          <aside class="video-collection" aria-label="Favorite video collection">
-            <div class="video-embed">
-              <iframe
-                data-video-frame
-                src="https://www.youtube.com/embed/9IiTdSnmS7E"
-                title="Casey Neistat video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
-            </div>
-            <div class="video-collection-footer">
-              <p data-video-caption>A collection of the best videos I have ever watched</p>
-              <button class="video-next" type="button" data-video-next aria-label="Next video">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </div>
-          </aside>
+        </div>
+      </section>
+
+      <section class="section videos" id="videos" aria-labelledby="videos-title">
+        <div class="video-heading">
+          <div>
+            <div class="section-kicker">Videos</div>
+            <h2 id="videos-title">A collection of the best videos I have ever watched.</h2>
+          </div>
+          <button class="video-next" type="button" data-video-next aria-label="Next video">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+        <div class="video-feature">
+          <div class="video-embed">
+            <iframe
+              data-video-frame
+              src="https://www.youtube.com/embed/9IiTdSnmS7E"
+              title="Sisyphus and the Impossible Dream"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-meta">
+            <span data-video-count>01 / 01</span>
+            <strong data-video-title>Sisyphus and the Impossible Dream</strong>
+            <p data-video-caption>Casey Neistat. The first video in this collection.</p>
+          </div>
         </div>
       </section>
 
@@ -153,7 +164,7 @@
             <div class="project-main">
               <span class="project-year">01</span>
               <strong>rPPG Robustness Report</strong>
-              <p>A research project testing camera-based heart-rate estimates in low light using Remote Photoplethysmography (rPPG).</p>
+              <p>A personal research project testing camera-based heart-rate estimates in low light using Remote Photoplethysmography (rPPG).</p>
             </div>
             <div class="project-actions">
               <a class="mini-button" href="assets/circadify-rppg-results.pdf" target="_blank" rel="noreferrer">Website</a>
@@ -367,8 +378,8 @@
       const favoriteVideos = [
         {
           src: "https://www.youtube.com/embed/9IiTdSnmS7E",
-          title: "Casey Neistat video",
-          caption: "A collection of the best videos I have ever watched",
+          title: "Sisyphus and the Impossible Dream",
+          caption: "Casey Neistat. The first video in this collection.",
         },
       ];
       let currentVideoIndex = 0;
@@ -377,11 +388,17 @@
         const video = favoriteVideos[currentVideoIndex];
         const frame = document.querySelector("[data-video-frame]");
         const caption = document.querySelector("[data-video-caption]");
+        const title = document.querySelector("[data-video-title]");
+        const count = document.querySelector("[data-video-count]");
         if (frame) {
           frame.src = video.src;
           frame.title = video.title;
         }
         if (caption) caption.textContent = video.caption;
+        if (title) title.textContent = video.title;
+        if (count) {
+          count.textContent = `${String(currentVideoIndex + 1).padStart(2, "0")} / ${String(favoriteVideos.length).padStart(2, "0")}`;
+        }
       });
     </script>
     <script src="./life-knot.js"></script>

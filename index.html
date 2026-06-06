@@ -564,8 +564,10 @@
         favoriteSongs.length ? `${favoriteSongs.length} tracks` : "waiting for tracks";
 
       document.querySelector("[data-tape-button]")?.addEventListener("click", (event) => {
+        event.currentTarget.classList.remove("is-playing");
+        void event.currentTarget.offsetWidth;
         event.currentTarget.classList.add("is-playing");
-        window.setTimeout(() => event.currentTarget.classList.remove("is-playing"), 620);
+        window.setTimeout(() => event.currentTarget.classList.remove("is-playing"), 840);
         if (!favoriteSongs.length) {
           updateSongDisplay(null);
           return;

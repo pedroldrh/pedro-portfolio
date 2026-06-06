@@ -176,9 +176,11 @@
                 <strong data-song-title>Click the tape for a random song.</strong>
               </p>
               <iframe
+                id="song-player"
                 class="song-frame"
                 data-song-frame
                 title="Embedded song player"
+                src="https://www.youtube.com/embed/B7PnQBn5k_E?enablejsapi=1&playsinline=1&rel=0"
                 allow="autoplay; encrypted-media"
               ></iframe>
             </div>
@@ -545,6 +547,23 @@
         song("2009", "Mac Miller", "6B3YwcjQ_bU"),
       ];
       let currentSongIndex = -1;
+      let songPlayer = null;
+      let pendingVideoId = null;
+
+      window.onYouTubeIframeAPIReady = () => {
+        songPlayer = new YT.Player("song-player", {
+          events: {
+            onStateChange: (event) => {
+              if (event.data === YT.PlayerState.ENDED) {
+                playRandomSong();
+              }
+            },
+          },
+        });
+        if (pendingVideoId) {
+          songPlayer.loadVideoById(pendingVideoId);
+        }
+      };
 
       const playRandomSong = () => {
         if (!favoriteSongs.length) {
@@ -579,6 +598,7 @@
         if (!song) {
           status.textContent = "Tape is empty for now.";
           title.textContent = "Send me the songs you want on it.";
+          pendingVideoId = null;
           frame.removeAttribute("src");
           floatingTape?.classList.remove("is-visible");
           return;
@@ -586,7 +606,12 @@
 
         status.textContent = song.artist;
         title.textContent = song.title;
-        frame.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&playsinline=1&rel=0`;
+        pendingVideoId = song.videoId;
+        if (songPlayer?.loadVideoById) {
+          songPlayer.loadVideoById(song.videoId);
+        } else {
+          frame.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&enablejsapi=1&playsinline=1&rel=0&origin=${encodeURIComponent(location.origin)}`;
+        }
         floatingTape?.classList.add("is-visible");
       };
 
@@ -631,6 +656,7 @@
         event.currentTarget.classList.toggle("is-flipped");
       });
     </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="./life-knot.js"></script>
   </body>
 </html>

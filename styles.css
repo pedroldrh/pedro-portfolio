@@ -446,6 +446,7 @@ h2 {
 .cassette-strip {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 14px;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 11px;
@@ -459,6 +460,25 @@ h2 {
 .cassette-label span:last-child,
 .cassette-strip {
   color: var(--muted);
+}
+
+.avicii-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  letter-spacing: 0;
+}
+
+.cassette-pill {
+  max-width: 190px;
+  border: 1px solid rgba(16, 18, 15, 0.22);
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: rgba(116, 217, 0, 0.14);
+  color: var(--text);
+  text-align: center;
+  white-space: normal;
 }
 
 .cassette-window {
@@ -832,6 +852,16 @@ h2 {
 
   .project-actions {
     padding-left: 0;
+  }
+
+  .cassette-label,
+  .cassette-strip {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cassette-pill {
+    max-width: none;
   }
 
   .mini-button {

@@ -150,6 +150,7 @@
             <button class="cassette" type="button" data-tape-button aria-label="Play a random song">
               <span class="cassette-label">
                 <span>Pedro's tape</span>
+                <span class="avicii-mark" aria-label="Avicii inspired mark">AVICII ◢ ◤</span>
                 <span data-song-count>waiting for tracks</span>
               </span>
               <span class="cassette-window">
@@ -159,12 +160,13 @@
               </span>
               <span class="cassette-strip">
                 <span>shuffle</span>
+                <span class="cassette-pill">Levels never left rotation</span>
                 <span>click tape</span>
               </span>
             </button>
             <div class="deck-display" aria-live="polite">
-              <span class="deck-status" data-song-status>Tape is empty for now.</span>
-              <strong data-song-title>Send me the songs you want on it.</strong>
+              <span class="deck-status" data-song-status>Mixtape loaded.</span>
+              <strong data-song-title>Click the tape for a random song.</strong>
               <a data-song-link href="#" aria-hidden="true" tabindex="-1">Open song</a>
             </div>
           </div>
@@ -494,7 +496,41 @@
           caption: "Stanford.",
         },
       ];
-      const favoriteSongs = [];
+      const song = (title, artist) => ({
+        title,
+        artist,
+        url: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${title} ${artist}`)}`,
+      });
+
+      const favoriteSongs = [
+        song("Colors", "Black Pumas"),
+        song("Ripple", "Grateful Dead"),
+        song("Use Somebody", "Kings of Leon"),
+        song("Caught Up in You", "38 Special"),
+        song("Feels Like Summer", "Childish Gambino"),
+        song("Charleston Girl", "Tyler Childers"),
+        song("Taking Water", "Billy Strings"),
+        song("Only a Fool Would Say That", "Steely Dan"),
+        song("East Coast Summers", "Kaleb Cohen"),
+        song("Ugly Heart", "G.R.L."),
+        song("Come Together", "The Beatles"),
+        song("Wish I Knew You", "The Revivalists"),
+        song("Lavender Girl", "Caamp"),
+        song("Heaven", "Avicii"),
+        song("Rein Me In", "Sam Fender and Olivia Dean"),
+        song("Fire on the Mountain", "Grateful Dead"),
+        song("Cruz de Navajas", "Mecano"),
+        song("Pero a Tu Lado", "Los Secretos"),
+        song("Listen to the Music", "The Doobie Brothers"),
+        song("One of These Nights", "Eagles"),
+        song("Showdown", "Electric Light Orchestra"),
+        song("Mountain Sound", "Of Monsters and Men"),
+        song("Forever and Ever, Amen", "Randy Travis"),
+        song("Teenage Dream", "Katy Perry"),
+        song("What You Know", "Two Door Cinema Club"),
+        song("Right Above It", "Lil Wayne and Drake"),
+        song("2009", "Mac Miller"),
+      ];
       let currentSongIndex = -1;
 
       const updateSongDisplay = (song) => {

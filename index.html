@@ -121,53 +121,62 @@
               golf. I’m currently a 13 hcp.
             </li>
           </ul>
-          <div class="about-notes">
-            <p class="about-note">
-              I’m a big fan of
-              <a href="https://www.youtube.com/@hubermanlab" target="_blank" rel="noreferrer">Andrew Huberman</a>
-              and
-              <a href="https://www.youtube.com/lexfridman" target="_blank" rel="noreferrer">Lex Fridman</a>’s
-              podcasts,
-              <a href="https://www.youtube.com/@GothamChess" target="_blank" rel="noreferrer">GothamChess</a>
-              videos, especially Guess the Elo,
-              <a href="https://www.youtube.com/@casey" target="_blank" rel="noreferrer">Casey Neistat</a>
-              as a whole, and
-              <a href="https://www.youtube.com/channel/UCcPLRur6-XtfpWJtDt0Fvrg" target="_blank" rel="noreferrer">Matt Spears</a>’
-              abandoned railroad videos. I also like
-              <a href="https://www.youtube.com/@PeterSantenello" target="_blank" rel="noreferrer">Peter Santenello</a>
-              videos for learning about the U.S. and its different places and
-              social scenes. I enjoy the show
-              <a href="https://www.youtube.com/@LaRevuelta_RTVE" target="_blank" rel="noreferrer">La Revuelta</a>
-              and have been a fan for the past six years.
-            </p>
-            <p class="about-note">
-              I really enjoy reading Paul Graham’s
-              <a href="https://www.paulgraham.com/articles.html" target="_blank" rel="noreferrer">essays</a>
-              about startups, ideas, and life.
-            </p>
-          </div>
-          <div class="music-player" aria-label="Music tape player">
-            <button class="cassette" type="button" data-tape-button aria-label="Play a random song">
-              <span class="cassette-label">
-                <span>Pedro's tape</span>
-                <span class="avicii-mark" aria-label="Avicii inspired mark">AVICII ◢ ◤</span>
-                <span data-song-count>waiting for tracks</span>
-              </span>
-              <span class="cassette-window">
-                <span class="cassette-reel"></span>
-                <span class="cassette-band"></span>
-                <span class="cassette-reel"></span>
-              </span>
-              <span class="cassette-strip">
-                <span>shuffle</span>
-                <span class="cassette-pill">Levels never left rotation</span>
-                <span>click tape</span>
-              </span>
-            </button>
-            <div class="deck-display" aria-live="polite">
-              <span class="deck-status" data-song-status>Mixtape loaded.</span>
-              <strong data-song-title>Click the tape for a random song.</strong>
-              <a data-song-link href="#" aria-hidden="true" tabindex="-1">Open song</a>
+          <div class="about-details">
+            <div class="about-notes">
+              <p class="about-note">
+                I’m a big fan of
+                <a href="https://www.youtube.com/@hubermanlab" target="_blank" rel="noreferrer">Andrew Huberman</a>
+                and
+                <a href="https://www.youtube.com/lexfridman" target="_blank" rel="noreferrer">Lex Fridman</a>’s
+                podcasts,
+                <a href="https://www.youtube.com/@GothamChess" target="_blank" rel="noreferrer">GothamChess</a>
+                videos, especially Guess the Elo,
+                <a href="https://www.youtube.com/@casey" target="_blank" rel="noreferrer">Casey Neistat</a>
+                as a whole, and
+                <a href="https://www.youtube.com/channel/UCcPLRur6-XtfpWJtDt0Fvrg" target="_blank" rel="noreferrer">Matt Spears</a>’
+                abandoned railroad videos. I also like
+                <a href="https://www.youtube.com/@PeterSantenello" target="_blank" rel="noreferrer">Peter Santenello</a>
+                videos for learning about the U.S. and its different places and
+                social scenes. I enjoy the show
+                <a href="https://www.youtube.com/@LaRevuelta_RTVE" target="_blank" rel="noreferrer">La Revuelta</a>
+                and have been a fan for the past six years.
+              </p>
+              <p class="about-note">
+                I really enjoy reading Paul Graham’s
+                <a href="https://www.paulgraham.com/articles.html" target="_blank" rel="noreferrer">essays</a>
+                about startups, ideas, and life.
+              </p>
+            </div>
+            <div class="music-player" aria-label="Music tape player">
+              <button class="cassette" type="button" data-tape-button aria-label="Play a random song">
+                <span class="cassette-shell">
+                  <span class="cassette-label">
+                    <span>Pedro's tape</span>
+                    <span class="avicii-mark" aria-label="Avicii inspired mark">AVICII ◢ ◤</span>
+                    <span data-song-count>27 tracks</span>
+                  </span>
+                  <span class="cassette-window">
+                    <span class="cassette-reel"></span>
+                    <span class="cassette-band"></span>
+                    <span class="cassette-reel"></span>
+                  </span>
+                  <span class="cassette-strip">
+                    <span>shuffle</span>
+                    <span class="cassette-pill">Levels never left rotation</span>
+                    <span>play</span>
+                  </span>
+                </span>
+              </button>
+              <p class="song-now-playing" aria-live="polite">
+                <span data-song-status>Mixtape loaded.</span>
+                <strong data-song-title>Click the tape for a random song.</strong>
+              </p>
+              <iframe
+                class="song-frame"
+                data-song-frame
+                title="Embedded song player"
+                allow="autoplay; encrypted-media"
+              ></iframe>
             </div>
           </div>
         </div>
@@ -496,64 +505,59 @@
           caption: "Stanford.",
         },
       ];
-      const song = (title, artist) => ({
+      const song = (title, artist, videoId) => ({
         title,
         artist,
-        url: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${title} ${artist}`)}`,
+        videoId,
       });
 
       const favoriteSongs = [
-        song("Colors", "Black Pumas"),
-        song("Ripple", "Grateful Dead"),
-        song("Use Somebody", "Kings of Leon"),
-        song("Caught Up in You", "38 Special"),
-        song("Feels Like Summer", "Childish Gambino"),
-        song("Charleston Girl", "Tyler Childers"),
-        song("Taking Water", "Billy Strings"),
-        song("Only a Fool Would Say That", "Steely Dan"),
-        song("East Coast Summers", "Kaleb Cohen"),
-        song("Ugly Heart", "G.R.L."),
-        song("Come Together", "The Beatles"),
-        song("Wish I Knew You", "The Revivalists"),
-        song("Lavender Girl", "Caamp"),
-        song("Heaven", "Avicii"),
-        song("Rein Me In", "Sam Fender and Olivia Dean"),
-        song("Fire on the Mountain", "Grateful Dead"),
-        song("Cruz de Navajas", "Mecano"),
-        song("Pero a Tu Lado", "Los Secretos"),
-        song("Listen to the Music", "The Doobie Brothers"),
-        song("One of These Nights", "Eagles"),
-        song("Showdown", "Electric Light Orchestra"),
-        song("Mountain Sound", "Of Monsters and Men"),
-        song("Forever and Ever, Amen", "Randy Travis"),
-        song("Teenage Dream", "Katy Perry"),
-        song("What You Know", "Two Door Cinema Club"),
-        song("Right Above It", "Lil Wayne and Drake"),
-        song("2009", "Mac Miller"),
+        song("Colors", "Black Pumas", "B7PnQBn5k_E"),
+        song("Ripple", "Grateful Dead", "dSwV35EZazM"),
+        song("Use Somebody", "Kings of Leon", "dfboIlgQiQQ"),
+        song("Caught Up in You", "38 Special", "8_2bofm90og"),
+        song("Feels Like Summer", "Childish Gambino", "ieL7BHjiyd8"),
+        song("Charleston Girl", "Tyler Childers", "qJcn8tCYZqs"),
+        song("Taking Water", "Billy Strings", "OWdaWKP-88s"),
+        song("Only a Fool Would Say That", "Steely Dan", "Hvz0TOm0zgI"),
+        song("East Coast Summers", "Kaleb Cohen", "BCQ2-kjeXRM"),
+        song("Ugly Heart", "G.R.L.", "I9gq4S3uB9Q"),
+        song("Come Together", "The Beatles", "oVW6wJ7MYDM"),
+        song("Wish I Knew You", "The Revivalists", "JYkzsz0ASQs"),
+        song("Lavender Girl", "Caamp", "yaPJyl6aNvk"),
+        song("Heaven", "Avicii", "EY72Qqj7G6M"),
+        song("Rein Me In", "Sam Fender and Olivia Dean", "4vpTO9TBZKc"),
+        song("Fire on the Mountain", "Grateful Dead", "iOF2psD2uTk"),
+        song("Cruz de Navajas", "Mecano", "QXVu4piSNoQ"),
+        song("Pero a Tu Lado", "Los Secretos", "p4wG3xDwnMQ"),
+        song("Listen to the Music", "The Doobie Brothers", "nbVE-1rHyVY"),
+        song("One of These Nights", "Eagles", "dkb811y4fkI"),
+        song("Showdown", "Electric Light Orchestra", "JHsUGJ4jDsw"),
+        song("Mountain Sound", "Of Monsters and Men", "74kLkPpfdIw"),
+        song("Forever and Ever, Amen", "Randy Travis", "KtKXc_v2iLE"),
+        song("Teenage Dream", "Katy Perry", "4-4lclep19A"),
+        song("What You Know", "Two Door Cinema Club", "YXwYJyrKK5A"),
+        song("Right Above It", "Lil Wayne and Drake", "b0wbCtrGjXA"),
+        song("2009", "Mac Miller", "6B3YwcjQ_bU"),
       ];
       let currentSongIndex = -1;
 
       const updateSongDisplay = (song) => {
         const status = document.querySelector("[data-song-status]");
         const title = document.querySelector("[data-song-title]");
-        const link = document.querySelector("[data-song-link]");
-        if (!status || !title || !link) return;
+        const frame = document.querySelector("[data-song-frame]");
+        if (!status || !title || !frame) return;
 
         if (!song) {
           status.textContent = "Tape is empty for now.";
           title.textContent = "Send me the songs you want on it.";
-          link.setAttribute("aria-hidden", "true");
-          link.setAttribute("tabindex", "-1");
-          link.removeAttribute("href");
+          frame.removeAttribute("src");
           return;
         }
 
         status.textContent = song.artist;
         title.textContent = song.title;
-        link.href = song.url;
-        link.textContent = "Open song";
-        link.removeAttribute("aria-hidden");
-        link.removeAttribute("tabindex");
+        frame.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&playsinline=1&rel=0`;
       };
 
       document.querySelector("[data-song-count]").textContent =

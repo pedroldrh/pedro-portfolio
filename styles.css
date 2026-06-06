@@ -786,8 +786,8 @@ h2 {
 
 .video-stage {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 54px;
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) 96px;
+  gap: 24px;
   align-items: center;
 }
 
@@ -836,8 +836,8 @@ h2 {
 }
 
 .video-next {
-  width: 54px;
-  height: 54px;
+  width: 96px;
+  height: 96px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -849,6 +849,11 @@ h2 {
   transition:
     transform 180ms ease,
     background 180ms ease;
+}
+
+.video-next svg {
+  width: 34px;
+  height: 34px;
 }
 
 .video-next:hover {
@@ -1019,9 +1024,14 @@ h2 {
   }
 
   .video-next {
-    width: 48px;
-    height: 48px;
+    width: 72px;
+    height: 72px;
     justify-self: end;
+  }
+
+  .video-next svg {
+    width: 28px;
+    height: 28px;
   }
 
   .project-row {

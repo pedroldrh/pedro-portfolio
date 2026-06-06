@@ -44,6 +44,11 @@
     </header>
 
     <main>
+      <button class="floating-tape" type="button" data-floating-tape aria-label="Skip cassette song">
+        <span>◢</span>
+        <span>◤</span>
+      </button>
+
       <section class="hero section" id="top">
         <div class="hero-copy">
           <h1>Hi, I’m Pedro.</h1>
@@ -542,32 +547,7 @@
       ];
       let currentSongIndex = -1;
 
-      const updateSongDisplay = (song) => {
-        const status = document.querySelector("[data-song-status]");
-        const title = document.querySelector("[data-song-title]");
-        const frame = document.querySelector("[data-song-frame]");
-        if (!status || !title || !frame) return;
-
-        if (!song) {
-          status.textContent = "Tape is empty for now.";
-          title.textContent = "Send me the songs you want on it.";
-          frame.removeAttribute("src");
-          return;
-        }
-
-        status.textContent = song.artist;
-        title.textContent = song.title;
-        frame.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&playsinline=1&rel=0`;
-      };
-
-      document.querySelector("[data-song-count]").textContent =
-        favoriteSongs.length ? `${favoriteSongs.length} tracks` : "waiting for tracks";
-
-      document.querySelector("[data-tape-button]")?.addEventListener("click", (event) => {
-        event.currentTarget.classList.remove("is-playing");
-        void event.currentTarget.offsetWidth;
-        event.currentTarget.classList.add("is-playing");
-        window.setTimeout(() => event.currentTarget.classList.remove("is-playing"), 840);
+      const playRandomSong = () => {
         if (!favoriteSongs.length) {
           updateSongDisplay(null);
           return;
@@ -580,6 +560,52 @@
         }
         currentSongIndex = nextSongIndex;
         updateSongDisplay(favoriteSongs[currentSongIndex]);
+      };
+
+      const animateCassette = (button) => {
+        if (!button) return;
+        button.classList.remove("is-playing");
+        void button.offsetWidth;
+        button.classList.add("is-playing");
+        window.setTimeout(() => button.classList.remove("is-playing"), 840);
+      };
+
+      const updateSongDisplay = (song) => {
+        const status = document.querySelector("[data-song-status]");
+        const title = document.querySelector("[data-song-title]");
+        const frame = document.querySelector("[data-song-frame]");
+        const floatingTape = document.querySelector("[data-floating-tape]");
+        if (!status || !title || !frame) return;
+
+        if (!song) {
+          status.textContent = "Tape is empty for now.";
+          title.textContent = "Send me the songs you want on it.";
+          frame.removeAttribute("src");
+          floatingTape?.classList.remove("is-visible");
+          return;
+        }
+
+        status.textContent = song.artist;
+        title.textContent = song.title;
+        frame.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&playsinline=1&rel=0`;
+        floatingTape?.classList.add("is-visible");
+      };
+
+      document.querySelector("[data-song-count]").textContent =
+        favoriteSongs.length ? `${favoriteSongs.length} tracks` : "waiting for tracks";
+
+      document.querySelector("[data-tape-button]")?.addEventListener("click", (event) => {
+        animateCassette(event.currentTarget);
+        playRandomSong();
+      });
+
+      document.querySelector("[data-floating-tape]")?.addEventListener("click", (event) => {
+        event.currentTarget.classList.remove("is-skipping");
+        void event.currentTarget.offsetWidth;
+        event.currentTarget.classList.add("is-skipping");
+        window.setTimeout(() => event.currentTarget.classList.remove("is-skipping"), 520);
+        animateCassette(document.querySelector("[data-tape-button]"));
+        playRandomSong();
       });
 
       let currentVideoIndex = 0;

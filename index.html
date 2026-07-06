@@ -181,6 +181,8 @@
                 data-song-frame
                 title="Embedded song player"
                 src="https://www.youtube.com/embed/B7PnQBn5k_E?enablejsapi=1&playsinline=1&rel=0"
+                aria-hidden="true"
+                tabindex="-1"
                 allow="autoplay; encrypted-media"
               ></iframe>
             </div>
@@ -552,6 +554,14 @@
 
       window.onYouTubeIframeAPIReady = () => {
         songPlayer = new YT.Player("song-player", {
+          playerVars: {
+            controls: 0,
+            disablekb: 1,
+            modestbranding: 1,
+            playsinline: 1,
+            rel: 0,
+            origin: location.origin,
+          },
           events: {
             onStateChange: (event) => {
               if (event.data === YT.PlayerState.ENDED) {

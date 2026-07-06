@@ -686,11 +686,14 @@ h2 {
 }
 
 .song-frame {
-  position: absolute;
-  width: 1px;
-  height: 1px;
+  position: fixed;
+  top: -240px;
+  left: -320px;
+  width: 240px;
+  height: 135px;
   border: 0;
-  opacity: 0.01;
+  opacity: 0;
+  clip-path: inset(50%);
   pointer-events: none;
 }
 

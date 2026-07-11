@@ -208,14 +208,21 @@
                 allowfullscreen
               ></iframe>
             </div>
-            <button class="video-next" type="button" data-video-next aria-label="Next video">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </button>
+            <div class="video-controls" aria-label="Video controls">
+              <button class="video-nav video-prev" type="button" data-video-prev aria-label="Previous video">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M19 12H5M11 6l-6 6 6 6" />
+                </svg>
+              </button>
+              <button class="video-nav video-next" type="button" data-video-next aria-label="Next video">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </div>
           </div>
           <div class="video-meta">
-            <span data-video-count>01 / 13</span>
+            <span data-video-count>01 / 14</span>
             <strong data-video-title>Sisyphus and the Impossible Dream</strong>
             <p data-video-caption>Casey Neistat.</p>
           </div>
@@ -512,6 +519,11 @@
           title: "Steve Jobs' 2005 Stanford Commencement Address",
           caption: "Stanford.",
         },
+        {
+          src: "https://www.youtube.com/embed/RCNgknc7Qv8",
+          title: "14. What Motivates Us: Sex",
+          caption: "YaleCourses.",
+        },
       ];
       const song = (title, artist, videoId) => ({
         title,
@@ -643,8 +655,8 @@
       });
 
       let currentVideoIndex = 0;
-      document.querySelector("[data-video-next]")?.addEventListener("click", () => {
-        currentVideoIndex = (currentVideoIndex + 1) % favoriteVideos.length;
+      const showVideo = (direction) => {
+        currentVideoIndex = (currentVideoIndex + direction + favoriteVideos.length) % favoriteVideos.length;
         const video = favoriteVideos[currentVideoIndex];
         const frame = document.querySelector("[data-video-frame]");
         const caption = document.querySelector("[data-video-caption]");
@@ -659,7 +671,10 @@
         if (count) {
           count.textContent = `${String(currentVideoIndex + 1).padStart(2, "0")} / ${String(favoriteVideos.length).padStart(2, "0")}`;
         }
-      });
+      };
+
+      document.querySelector("[data-video-next]")?.addEventListener("click", () => showVideo(1));
+      document.querySelector("[data-video-prev]")?.addEventListener("click", () => showVideo(-1));
 
       document.querySelector("[data-knot-card]")?.addEventListener("click", (event) => {
         if (event.target.closest("canvas")?.dataset.wasDragged) return;

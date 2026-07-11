@@ -838,7 +838,12 @@ h2 {
   line-height: 1.45;
 }
 
-.video-next {
+.video-controls {
+  display: grid;
+  gap: 12px;
+}
+
+.video-nav {
   width: 96px;
   height: 96px;
   display: inline-flex;
@@ -854,13 +859,17 @@ h2 {
     background 180ms ease;
 }
 
-.video-next svg {
+.video-nav svg {
   width: 34px;
   height: 34px;
 }
 
 .video-next:hover {
   transform: translateX(2px);
+}
+
+.video-prev:hover {
+  transform: translateX(-2px);
 }
 
 .projects {
@@ -1026,13 +1035,17 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .video-next {
-    width: 72px;
-    height: 72px;
+  .video-controls {
+    display: flex;
     justify-self: end;
   }
 
-  .video-next svg {
+  .video-nav {
+    width: 72px;
+    height: 72px;
+  }
+
+  .video-nav svg {
     width: 28px;
     height: 28px;
   }

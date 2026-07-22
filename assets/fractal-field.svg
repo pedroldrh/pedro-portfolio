@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+  <defs>
+    <linearGradient id="field" x1="0" y1="0.1" x2="1" y2="0.9">
+      <stop offset="0" stop-color="#d832a1"/>
+      <stop offset="0.48" stop-color="#ff9b43"/>
+      <stop offset="0.72" stop-color="#e8d633"/>
+      <stop offset="1" stop-color="#45df42"/>
+    </linearGradient>
+    <filter id="drift" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency=".008" numOctaves="3" seed="17" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="34"/>
+    </filter>
+    <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2" seed="8" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feBlend in="SourceGraphic" in2="mono" mode="soft-light"/>
+    </filter>
+    <pattern id="spirals" width="300" height="250" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#301d45" stroke-linecap="round" filter="url(#drift)">
+        <path d="M150 130c-6-42 49-64 75-28 31 43-7 102-58 97-67-6-97-88-56-140 49-62 151-40 171 36" stroke-width="7" opacity=".34"/>
+        <path d="M150 130c-22 2-28-29-6-37 29-11 50 22 34 46-20 31-67 18-72-18" stroke-width="4" opacity=".42"/>
+        <path d="M58 34c-4-21 25-33 38-14 14 20-5 48-28 42-28-7-36-45-15-62" stroke-width="4" opacity=".26"/>
+        <path d="M255 220c-3-18 22-29 34-13 14 19-3 43-24 40-26-3-37-34-23-54" stroke-width="4" opacity=".29"/>
+        <path d="M45 200c22-25 47-31 76-17m-92-25c42-25 83-20 116 12m94-142c-22 12-38 30-47 55m-28-75c3 31-8 54-32 73" stroke-width="3" opacity=".28"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="1200" height="760" fill="url(#field)"/>
+  <g opacity=".25" filter="url(#drift)">
+    <circle cx="200" cy="115" r="185" fill="#7d2bb8"/>
+    <circle cx="565" cy="690" r="230" fill="#ffce45"/>
+    <circle cx="1050" cy="145" r="230" fill="#6be048"/>
+  </g>
+  <rect width="1200" height="760" fill="url(#spirals)"/>
+  <rect width="1200" height="760" fill="transparent" filter="url(#grain)" opacity=".42"/>
+</svg>

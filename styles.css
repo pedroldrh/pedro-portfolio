@@ -136,11 +136,14 @@ nav a:hover {
 .hero {
   min-height: calc(100svh - 76px);
   display: grid;
-  grid-template-columns: minmax(0, 0.84fr) minmax(340px, 0.58fr);
-  gap: 72px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   padding: 76px 0 48px;
   position: relative;
+}
+
+.hero-copy {
+  max-width: 920px;
 }
 
 .hero-copy h1 {

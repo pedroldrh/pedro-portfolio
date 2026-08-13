@@ -193,10 +193,13 @@ nav a:hover {
   border-right: 1px solid var(--line);
 }
 
-.project-index li:last-child {
-  grid-column: 1 / -1;
+.project-index li:nth-last-child(-n + 2) {
   border-right: 0;
   border-bottom: 0;
+}
+
+.project-index li:nth-last-child(2) {
+  border-right: 1px solid var(--line);
 }
 
 .project-index a {
